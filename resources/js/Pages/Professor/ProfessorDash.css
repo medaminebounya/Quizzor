@@ -1,0 +1,58 @@
+.prof-container {
+    display: flex;
+    min-height: 100vh;
+    background: #1a1a2e; /* Dark theme to match Login */
+    color: white;
+}
+
+/* Sidebar Styling */
+.prof-sidebar {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+}
+
+.sidebar-brand { font-weight: 800; font-size: 22px; margin-bottom: 40px; }
+.sidebar-brand span { color: #a855f7; font-weight: 300; margin-left: 5px; }
+
+.nav-group label { font-size: 10px; letter-spacing: 2px; opacity: 0.4; display: block; margin: 25px 0 10px; }
+.nav-link { 
+    padding: 12px 15px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    color: rgba(255,255,255,0.7); 
+}
+.nav-link:hover, .nav-link.active { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+
+/* Main Content Area */
+.prof-content { flex: 1; padding: 50px; }
+.prof-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+
+.view-toggle { background: rgba(0,0,0,0.2); padding: 5px; border-radius: 12px; }
+.view-toggle button { 
+    background: transparent; border: none; color: white; padding: 8px 20px; 
+    border-radius: 8px; cursor: pointer; 
+}
+.view-toggle .btn-active { background: #a855f7; }
+
+/* Progress Bar Logic */
+.progress-bar-bg { width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: #a855f7; }
+
+/* Tags */
+.tag { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.tag.excellent { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.tag.atrisk { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+.clickable-row { cursor: pointer; transition: 0.2s; }
+.clickable-row:hover { background: rgba(255,255,255,0.05); }
+
+.glass-panel { 
+    background: rgba(255, 255, 255, 0.03); 
+    padding: 30px; 
+    border-radius: 20px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+}

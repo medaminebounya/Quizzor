@@ -1,0 +1,129 @@
+/* DASHBOARD LAYOUT */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* THE ANALYTICS CARDS (TOP) */
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+}
+
+.progress-wheel {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.progress-wheel svg { transform: rotate(-90deg); }
+.progress-wheel circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+.progress-wheel .bg { stroke: rgba(255,255,255,0.1); }
+.progress-wheel .fill { 
+    stroke: #10b981; 
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+.wheel-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.dashboard-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    text-align: left;
+}
+
+.course-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid #10b981;
+}
+
+.course-list { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+.course-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #0a1f1c;
+    color: white;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 260px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+}
+
+.sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    background: linear-gradient(to right, #10b981, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-item {
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,0.7);
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    background: radial-gradient(at 0% 0%, hsla(160, 40%, 15%, 1) 0, transparent 50%);
+}
+.quiz-action-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.1) 100%);
+    border: 1px solid #10b981;
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
