@@ -30,15 +30,22 @@ class Course extends Model
         return $this->hasMany(Quiz::class);
     }
 
-    // Helper method to check if course is draft
-    public function isDraft()
-    {
-        return $this->status === 'draft';
+    // Relationship: Course has many Students through Enrollments
+    public function students() 
+    { 
+        return $this->belongsToMany(User::class, 'enrollments', 'course_id', 'student_id')
+                    ->withPivot('status')
+                    ->withTimestamps();
     }
 
-    // Helper method to check if course is approved
-    public function isApproved()
-    {
+    // Helper Methods
+    public function isDraft() {
+        return $this->status === 'draft';
+    }
+    public function isApproved() {
         return $this->status === 'approved';
+    }
+    public function isPending() {
+        return $this->status === 'pending';
     }
 }
