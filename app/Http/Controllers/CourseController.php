@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Models\Permission;
 
 class CourseController extends Controller
 {
     // Show all courses (for professor)
     public function index()
     {
-        // Get courses for current professor
-        $courses = Course::where('professor_id', auth()->id())->get();
-        return view('courses.index', compact('courses'));
+        if (auth()->user()->role !== 'professor') {
+        abort(403, 'Only Professors can manage courses.');
+        }
+    $courses = Course::where('professor_id', auth()->id())->get();
+    return view('courses.index', compact('courses'));
     }
 
     // Show form to create new course
@@ -111,4 +114,12 @@ class CourseController extends Controller
 
         return redirect()->route('courses.show', $course)->with('success', 'Course submitted for admin approval!');
     }
+
+    public function hasPermission($action)
+    {
+    return Permission::where('prof_id', auth()->id()) 
+        ->where('action_perm', $action)
+        ->where('status_perm', 'approved')
+        ->exists();
+    }   
 }

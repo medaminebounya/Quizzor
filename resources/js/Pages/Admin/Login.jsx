@@ -1,39 +1,19 @@
-import React, { useState } from 'react';
-import { Link, router } from '@inertiajs/react';
+import React from 'react';
+import { Link, useForm } from '@inertiajs/react'; // Changed to useForm
 import '../../../css/LoginCommon.css';
 
 export default function AdminLogin() {
-    const [values, setValues] = useState({
+    // useForm handles the state, errors, and submission for us
+    const { data, setData, post, processing, errors } = useForm({
         email: "",
         password: "",
         assignedId: ""
     });
 
-    const [error, setError] = useState("");
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValues(oldValues => ({
-            ...oldValues,
-            [name]: value,
-        }));
-
-        if (name === "password") {
-            if (value.length > 0 && value.length < 8) {
-                setError("Password must be at least 8 characters.");
-            } else {
-                setError("");
-            }
-        }
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (values.password.length < 8) {
-            setError("Cannot submit: Password too short.");
-            return;
-        }
-        router.get('/admin/dashboard');
+        // Sends the data to the AdminAuthController@login method
+        post('/admin/login');
     };
 
     return (
@@ -50,42 +30,41 @@ export default function AdminLogin() {
                         <label>Email Address</label>
                         <input 
                             type="email" 
-                            name="email"
+                            value={data.email}
+                            onChange={e => setData('email', e.target.value)}
                             placeholder="admin@quizzor.com" 
-                            value={values.email}
-                            onChange={handleChange}
                             required 
                         />
+                        {errors.email && <span className="error-text">{errors.email}</span>}
                     </div>
 
                     <div className="input-group">
                         <label>Password</label>
                         <input 
                             type="password" 
-                            name="password"
+                            value={data.password}
+                            onChange={e => setData('password', e.target.value)}
                             placeholder="••••••••" 
-                            value={values.password}
-                            onChange={handleChange}
                             required 
                         />
-                        {error && <span className="error-text">{error}</span>}
+                        {errors.password && <span className="error-text">{errors.password}</span>}
                     </div>
 
                     <div className="input-group">
-                        <label>Assigned Admin ID</label>
+                        <label>Assigned Admin ID (Matricule)</label>
                         <input 
                             type="text" 
-                            name="assignedId"
+                            value={data.assignedId}
+                            onChange={e => setData('assignedId', e.target.value)}
                             placeholder="e.g. ADM-9921" 
-                            value={values.assignedId}
-                            onChange={handleChange}
                             required 
                         />
-                        <small>Use the ID provided by your department</small>
+                        {errors.assignedId && <span className="error-text">{errors.assignedId}</span>}
+                        <small>Must start with "ADM-"</small>
                     </div>
 
-                    <button type="submit" className="login-btn">
-                        Enter Portal
+                    <button type="submit" className="login-btn" disabled={processing}>
+                        {processing ? 'Connecting...' : 'Enter Portal'}
                     </button>
                 </form>
 

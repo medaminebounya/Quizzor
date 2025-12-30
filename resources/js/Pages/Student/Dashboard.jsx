@@ -1,131 +1,113 @@
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
 import './Dashboard.css';
 
-const ProgressWheel = ({ percent }) => {
-    const radius = 35;
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (percent / 100) * circumference;
-    return (
-        <div className="progress-wheel" style={{width: '80px', height: '80px'}}>
-            <svg width="80" height="80">
-                <circle className="bg" cx="40" cy="40" r={radius} strokeWidth="6" />
-                <circle className="fill" cx="40" cy="40" r={radius} strokeWidth="6"
-                        style={{ strokeDasharray: circumference, strokeDashoffset: offset }} />
-            </svg>
-            <div className="wheel-text" style={{fontSize: '0.9rem'}}>{percent}%</div>
-        </div>
-    );
-};
-
 export default function StudentDashboard() {
-    const [activeTab, setActiveTab] = useState('Overview');
+    const [view, setView] = useState('browse');
+
+    const [quizzes] = useState([
+        { id: 1, title: "Data Structures Midterm", course: "CS101", time: "45m", diff: "Hard", xp: "500 XP" },
+        { id: 2, title: "React Hooks & State", course: "Web Dev", time: "20m", diff: "Medium", xp: "250 XP" },
+        { id: 3, title: "Database Normalization", course: "DB System", time: "30m", diff: "Medium", xp: "300 XP" },
+    ]);
 
     return (
-        <div className="dashboard-wrapper theme-student">
-            {/* SIDEBAR */}
-            <aside className="sidebar">
-                <div className="sidebar-logo">QUIZZOR.</div>
-                <nav>
-                    {['Overview', 'Available Courses', 'My Quizzes', 'Grades', 'Settings'].map(item => (
-                        <div key={item}
-                             className={`nav-item ${activeTab === item ? 'active' : ''}`}
-                             onClick={() => setActiveTab(item)}>
-                            {item}
-                        </div>
-                    ))}
-                </nav>
-                <div style={{marginTop: 'auto'}}>
-                    <Link href="/" className="nav-item" style={{color: '#ff6b6b'}}>Sign Out</Link>
+        <div className="stu-container">
+            {/* Professional Glass Sidebar */}
+            <aside className="stu-sidebar">
+                <div className="sidebar-brand">Quizzor <span>Student</span></div>
+                
+                <div className="stu-profile-card">
+                    <div className="stu-avatar">AB</div>
+                    <div className="stu-meta">
+                        <p className="stu-name">Amine Bounya</p>
+                        <p className="stu-rank">Rank: #12 Global</p>
+                    </div>
                 </div>
+
+                <nav className="nav-group">
+                    <label>LEARNING HUB</label>
+                    <div className={`nav-link ${view === 'browse' ? 'active' : ''}`} onClick={() => setView('browse')}>
+                        Browse Quizzes
+                    </div>
+                    <div className={`nav-link ${view === 'results' ? 'active' : ''}`} onClick={() => setView('results')}>
+                        My Results
+                    </div>
+                    
+                    <label>GAMIFICATION</label>
+                    <div className="nav-link">Leaderboard</div>
+                    <div className="nav-link">Achievements <span className="badge-pill">5</span></div>
+                </nav>
             </aside>
 
-            {/* MAIN CONTENT */}
-            <main className="main-content">
-                <header style={{display: 'flex', justifyContent: 'space-between', marginBottom: '40px'}}>
-                    <div>
-                        <h1 style={{margin: 0}}>Student Dashboard</h1>
-                        <p style={{opacity: 0.6}}>Tracking your academic journey</p>
-                    </div>
-                    <div style={{textAlign: 'right'}}>
-                        <div style={{fontWeight: 'bold'}}>Amine Bounya</div>
-                        <div style={{fontSize: '12px', color: '#10b981'}}>STU-2025-001</div>
-                    </div>
-                </header>
-
-                {/* TOP ANALYTICS */}
-                <div className="dashboard-grid">
-                    <div className="stat-card" style={{minHeight: '140px', flexDirection: 'row', gap: '20px'}}>
-                        <ProgressWheel percent={72} />
-                        <div>
-                            <h4 style={{margin: 0}}>Total Progress</h4>
-                            <p style={{fontSize: '12px', opacity: 0.5}}>Across 5 courses</p>
+            {/* Main Content Area with proper scaling */}
+            <main className="stu-content">
+                <div className="content-inner">
+                    <header className="stu-header">
+                        <div className="header-info">
+                            <h1>Available Quizzes</h1>
+                            <p>Track your progress and level up your skills.</p>
                         </div>
-                    </div>
-                    <div className="stat-card" style={{minHeight: '140px'}}>
-                        <h2 style={{margin: 0, color: '#10b981'}}>12</h2>
-                        <p style={{margin: 0, fontSize: '14px'}}>Quizzes Taken</p>
-                    </div>
-                    <div className="stat-card" style={{minHeight: '140px'}}>
-                        <h2 style={{margin: 0}}>15.25</h2>
-                        <p style={{margin: 0, fontSize: '14px'}}>Note Generale</p>
+                        
+                        <div className="level-system">
+                            <div className="level-info">
+                                <span className="lvl-badge">Level 8</span>
+                                <span className="xp-text">2,400 / 3,000 XP</span>
+                            </div>
+                            <div className="xp-track">
+                                <div className="xp-progress" style={{width: '75%'}}></div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div className="main-grid-layout">
+                        {/* Primary Dashboard Side */}
+                        <section className="primary-view">
+                            <div className="stats-row">
+                                <div className="stat-card">
+                                    <span className="stat-label">QUIZZES DONE</span>
+                                    <div className="stat-val">24</div>
+                                </div>
+                                <div className="stat-card highlight">
+                                    <span className="stat-label">AVG. SCORE</span>
+                                    <div className="stat-val">16.4/20</div>
+                                </div>
+                                <div className="stat-card">
+                                    <span className="stat-label">TOTAL XP</span>
+                                    <div className="stat-val">12.5k</div>
+                                </div>
+                            </div>
+
+                            <div className="quiz-feed">
+                                {quizzes.map(quiz => (
+                                    <div key={quiz.id} className="quiz-card-heavy">
+                                        <div className="card-top">
+                                            <span className="course-tag">{quiz.course}</span>
+                                            <span className={`diff-pill ${quiz.diff.toLowerCase()}`}>{quiz.diff}</span>
+                                        </div>
+                                        <h2>{quiz.title}</h2>
+                                        <div className="card-meta">
+                                            <div className="meta-item">⏱ {quiz.time}</div>
+                                            <div className="xp-reward">+{quiz.xp}</div>
+                                        </div>
+                                        <button className="btn-attempt">Start Attempt</button>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        {/* Secondary Sidebar Content to fill the right side */}
+                        <section className="secondary-view">
+                            <div className="glass-panel">
+                                <h3>Global Leaderboard</h3>
+                                <div className="leaderboard-list">
+                                    <div className="rank-item"><span>1. Sarah J.</span> <span>18.2k</span></div>
+                                    <div className="rank-item active"><span>12. You</span> <span>12.5k</span></div>
+                                    <div className="rank-item"><span>13. Karim L.</span> <span>12.1k</span></div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
-
-                {/* DYNAMIC CONTENT BASED ON SECTION */}
-                <section>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
-                        <h2 style={{margin: 0}}>Available Quizzes</h2>
-                        <span style={{color: '#10b981', fontSize: '14px'}}>View all →</span>
-                    </div>
-
-                    {/* ACTIVE QUIZ CARD */}
-                    <div className="quiz-action-card">
-                        <div>
-                            <span className="badge" style={{background: '#10b981', marginBottom: '10px'}}>URGENT</span>
-                            <h3 style={{margin: '5px 0'}}>Mid-Term: Intro to Artificial Intelligence</h3>
-                            <p style={{fontSize: '14px', opacity: 0.7, margin: 0}}>Time Limit: 45 mins | 20 Questions</p>
-                        </div>
-                        <button className="login-btn" style={{width: 'auto', padding: '12px 30px'}}>Start Quiz</button>
-                    </div>
-
-                    {/* COURSE PROGRESS SECTION */}
-                    <div className="dashboard-sections" style={{marginTop: '40px'}}>
-                        <div>
-                            <h3>Courses in Progress</h3>
-                            <div className="course-item">
-                                <div style={{display:'flex', justifyContent:'space-between', fontSize: '14px'}}>
-                                    <span>Database Management Systems</span>
-                                    <span>82%</span>
-                                </div>
-                                <div className="progress-bar-bg" style={{marginTop: '8px'}}><div className="progress-fill" style={{width: '82%'}}></div></div>
-                            </div>
-                            <div className="course-item">
-                                <div style={{display:'flex', justifyContent:'space-between', fontSize: '14px'}}>
-                                    <span>React Frameworks</span>
-                                    <span>40%</span>
-                                </div>
-                                <div className="progress-bar-bg" style={{marginTop: '8px'}}><div className="progress-fill" style={{width: '40%'}}></div></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3>🏆 Recent Grades</h3>
-                            <table style={{width: '100%', borderCollapse: 'collapse'}}>
-                                <tbody>
-                                    <tr style={{borderBottom: '1px solid rgba(255,255,255,0.05)'}}>
-                                        <td style={{padding: '12px 0'}}>UI Design Basics</td>
-                                        <td style={{textAlign: 'right', color: '#10b981', fontWeight: 'bold'}}>95/100</td>
-                                    </tr>
-                                    <tr style={{borderBottom: '1px solid rgba(255,255,255,0.05)'}}>
-                                        <td style={{padding: '12px 0'}}>Laravel Auth Systems</td>
-                                        <td style={{textAlign: 'right', color: '#10b981', fontWeight: 'bold'}}>88/100</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
             </main>
         </div>
     );

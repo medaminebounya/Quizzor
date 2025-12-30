@@ -16,6 +16,12 @@ class User extends Authenticatable
         'password',
         'role',
     ];
+    public static function getRoleFromSchoolId($schoolId) {
+    if (str_starts_with($schoolId, 'ADM-')) return 'admin';
+    if (str_starts_with($schoolId, 'PRO-')) return 'professor';
+    if (str_starts_with($schoolId, 'STU-')) return 'student';
+    return null;
+}
 
     protected $hidden = [
         'password',

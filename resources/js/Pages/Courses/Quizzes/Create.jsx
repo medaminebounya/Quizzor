@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from '@inertiajs/react';
-import '../../../css/LoginCommon.css'; // Using our shared theme
+import '../../../../css/LoginCommon.css'; // Using our shared theme
 
 export default function CreateQuiz({ course }) {
     const { data, setData, post, processing, errors } = useForm({
