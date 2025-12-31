@@ -12,7 +12,6 @@ export default function AdminLogin() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Sends the data to the AdminAuthController@login method
         post('/admin/login');
     };
 

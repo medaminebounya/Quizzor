@@ -12,7 +12,6 @@ export default function StudentDashboard() {
 
     return (
         <div className="stu-container">
-            {/* Professional Glass Sidebar */}
             <aside className="stu-sidebar">
                 <div className="sidebar-brand">Quizzor <span>Student</span></div>
                 
@@ -60,7 +59,6 @@ export default function StudentDashboard() {
                     </header>
 
                     <div className="main-grid-layout">
-                        {/* Primary Dashboard Side */}
                         <section className="primary-view">
                             <div className="stats-row">
                                 <div className="stat-card">
@@ -94,8 +92,6 @@ export default function StudentDashboard() {
                                 ))}
                             </div>
                         </section>
-
-                        {/* Secondary Sidebar Content to fill the right side */}
                         <section className="secondary-view">
                             <div className="glass-panel">
                                 <h3>Global Leaderboard</h3>

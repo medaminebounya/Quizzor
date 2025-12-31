@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Admin.css';
 
 export default function AdminDashboard() {
-    // Mock Data for Courses (Approval Queue)
+    // Mock Data for Courses
     const [courses, setCourses] = useState([
         { id: 1, title: "Algorithmiques", author: "Dr. Remmach", status: "Pending" },
         { id: 2, title: "Base de Données", author: "Prof. Amine", status: "Pending" },
